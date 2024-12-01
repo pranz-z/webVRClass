@@ -1,0 +1,603 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VR.ified</title>
+    <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap" rel="stylesheet">
+
+
+
+
+
+
+<style>
+/* Specific text elements */
+h1, h2, h6, p, label, .login-link, .forgot-password-link, .create-account-btn {
+    color: #809C13; /* Green color */
+}
+
+/* Also for input placeholder text */
+input::placeholder, select::placeholder {
+    color: #809C13; /* Green color for placeholder text */
+}
+
+h1 {
+    font-family: 'Racing Sans One', sans-serif; /* Apply Racing Sans One font */
+    color: #809C13; /* Apply the green color */
+    font-size: 32;
+}
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(90deg, #f9f6b2, #c9e88d); /* Corrected gradient syntax */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Header Section */
+.header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align logo to the left */
+}
+
+.logo img {
+    max-width: 120px; /* Reduced logo size */
+    height: auto;
+    margin: 10px 20px; /* Margin for spacing from the edges */
+}
+
+/* Thin Line Below Logo */
+.header-line {
+    width: 100%; /* Full width of the header */
+    height: 3px; /* Thin line */
+    background-color: #000000; /* Black color for the line */
+    margin-top: 10px; /* Space between the logo and the line */
+}
+
+/* Container Styling */
+.container {
+    width: 120%;
+    max-width: 350px;
+    text-align: center;
+    padding-top: 50px; /* Adjusted for smaller logo */
+}
+
+/* Form Box */
+.form-box {
+    background: linear-gradient(90deg, #f9f6b2, #c9e88d); /* Corrected gradient syntax */
+    border-radius: 10px;
+    box-shadow: 0 8px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    display: none;
+}
+
+.form-box.active {
+    display: block;
+}
+
+.form-box h2 {
+    font-size: 14px; /* Smaller font size */
+    color: #006600;
+    margin-bottom: 6px;
+}
+
+.form-box p {
+    font-size: 12px; /* Smaller font size */
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Buttons */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 50px;
+}
+
+.btn {
+    background-color: #d6f5d6; /* Light green button */
+    border: 1px solid #006600;
+    border-radius: 70px;
+    color: #006600;
+    font-size: 16px; /* Adjusted font size */
+    padding: 5px 10px; /* Reduced padding for smaller size */
+    width: 150px; /* Set fixed width for buttons */
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 0 auto; /* Center-align buttons */
+}
+
+.btn:hover {
+    background-color: #c2f0c2;
+    align-items: center;
+}
+
+.submit-btn {
+    background-color: #006600 !important; /* Green background with !important to ensure it applies */
+    color: white;
+    font-size: 12px;
+    padding: 4px 10px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, box-shadow 0.3s;
+    width: 110px;
+    margin: 0 auto;
+    margin-top: -15px;
+    position: relative;
+    bottom: -17px;
+}
+
+.submit-btn:hover {
+    background-color: #004d00 !important; /* Darker green on hover with !important */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+input, select {
+       background: linear-gradient(90deg, #f9f6b2, #c9e88d); /* Corrected gradient syntax */
+
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 6px;
+    border-radius: 20px; /* Oblong shape */
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    outline: none;
+    font-size: 12px; /* Smaller font size */
+    transition: box-shadow 0.3s, border-color 0.3s;
+    color: #809C13;
+}
+
+input:focus, select:focus {
+    border-color: #006600;
+    box-shadow: 0 4px 10px rgba(0, 102, 0, 0.3);
+}
+
+.login-link {
+    font-size: 12px;
+    color: #006600;
+    text-decoration: none;
+    display: block;
+    margin-top: -15px; /* Moves the link upward */
+    position: relative; /* Ensures the link can be moved without affecting siblings */
+    top: -15px; /* Adjusts vertical position */
+    text-align: center; /* Keeps it centered below the button */
+}
+
+.login-link:hover {
+    color: #004d00;
+}
+
+/* Forgot Password Link */
+.forgot-password-link {
+    font-size: 12px;
+    color: #006600;
+    text-decoration: none;
+    margin-top: 100px;
+}
+
+.forgot-password-link:hover {
+    color: #004d00;
+}
+
+.forgot-password-link {
+    font-size: 12px;
+    color: #006600;
+    text-decoration: none;
+    margin-top: -45px; /* Adjusted for upward movement */
+    display: block;
+    margin-top: -15px; /* Moves the link upward */
+    position: relative; /* Ensures the link can be moved without affecting siblings */
+    top: -10px; /* Adjusts vertical position */
+    text-align: center; /* Keeps it centered below the button */
+}
+
+/* Create New Account Button */
+.create-account-btn {
+    background-color: #006600;
+    color: white;
+    font-size: 12px; /* Smaller font size */
+    padding: 8px 5px; /* Reduced padding for a shorter button */
+    border: none;
+    border-radius: 10px; /* Oblong shape */
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, box-shadow 0.3s;
+    width: 170px; /* Let the width adjust based on padding */
+    margin: 0 auto; /* Center-align buttons */
+    margin-top: -15px; /* Moves the link upward */
+    position: relative; /* Ensures the link can be moved without affecting siblings */
+    top: -10px; /* Adjusts vertical position */
+    text-align: center; /* Keeps it centered below the button */
+}
+
+.create-account-btn:hover {
+    background-color: #c2f0c2;
+}
+
+/* Name Group Styling */
+.name-group {
+    display: flex;
+    justify-content: space-between; /* Ensure space between the fields */
+    gap: 10px; /* Adds space between the fields */
+    font-family: 'Libre Franklin' sans-serif;
+    color: #809C13;
+}
+
+.name-group input {
+    width: 48%; /* Each input takes up 48% of the container width, leaving space between them */
+}
+
+/* Birthday Section */
+.birthday-label {
+    display: block;
+    text-align: left;
+    font-size: 12px;
+    color: #006600;
+    margin-bottom: 6px;
+    font-family: 'Libre Franklin' sans-serif;
+    color: #809C13;
+}
+
+.birthday-group {
+    display: flex;
+    gap: 10px;
+}
+
+.birthday-group select, .birthday-group input {
+    flex: 1;
+    padding: 6px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    font-size: 12px;
+    color: #809C13;
+}
+
+.birthday-group input {
+    width: 30%;
+
+
+}
+/* Gender Dropdown */
+        select.gender {
+            padding: 6px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            font-size: 12px;
+            color: #809C13;
+        }
+
+        /* Gender Label Alignment */
+.gender-label {
+    display: block;
+    text-align: left; /* Align text to the left */
+    font-size: 12px;
+    color: #006600;
+    margin-bottom: 6px;
+    font-family: 'Libre Franklin', sans-serif;
+    color: #809C13;
+}
+
+.acc-type {
+    display: block;
+    text-align: left; /* Align text to the left */
+    font-size: 12px;
+    color: #006600;
+    margin-bottom: 6px;
+    font-family: 'Libre Franklin', sans-serif;
+    color: #809C13;
+}
+
+
+/* Gender Selection Container (Individual oblong shapes for each option) */
+.gender-container {
+    display: flex;
+    justify-content: space-between; /* Space between Male and Female */
+    align-items: center;
+    gap: 10px; /* Adds space between the gender options */
+    font-size: 12px;
+    font-family: 'Libre Franklin', sans-serif;
+    color: #809C13;
+    width: 100%; /* Adjust to fit across the container */
+    margin-bottom: 20px; /* Adds space below the gender selection */
+}
+
+.acctype-container {
+    display: flex;
+    justify-content: space-between; /* Space between Male and Female */
+    align-items: center;
+    gap: 10px; /* Adds space between the gender options */
+    font-size: 12px;
+    font-family: 'Libre Franklin', sans-serif;
+    color: #809C13;
+    width: 100%; /* Adjust to fit across the container */
+    margin-bottom: 20px; /* Adds space below the gender selection */
+}
+
+/* Individual Gender Radio Button Styling */
+.gender-option {
+     background: linear-gradient(90deg, #f9f6b2, #c9e88d); /* Corrected gradient syntax */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 15px;
+    border-radius: 25px; /* Oblong shape */
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    width: 45%; /* Each option takes up 45% of the container's width */
+    text-align: center;
+    height: 27px;
+}
+
+.acctype-option {
+     background: linear-gradient(90deg, #f9f6b2, #c9e88d); /* Corrected gradient syntax */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 15px;
+    border-radius: 25px; /* Oblong shape */
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    width: 45%; /* Each option takes up 45% of the container's width */
+    text-align: center;
+    height: 27px;
+}
+
+/* Gender Radio Button Styling */
+.gender-option input[type="radio"] {
+    margin-right: 5px; /* Spacing between radio button and label */
+    width: 12px;
+    height: 12px;
+}
+
+.acctype-option input[type="radio"] {
+    margin-right: 5px; /* Spacing between radio button and label */
+    width: 12px;
+    height: 12px;
+}
+
+/* Teacher and Student Selection */
+.button-group .btn {
+    background: linear-gradient(90deg, #f9f6b2, #c9e88d); /* Same gradient as background */
+    border: 1px solid #006600;
+    border-radius: 70px;
+    color: #006600;
+    font-size: 16px;
+    padding: 5px 10px;
+    width: 150px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 0 auto;
+}
+
+/* Ensure the background of the selected button also matches */
+.button-group .btn:hover {
+    background: linear-gradient(90deg, #f9f6b2, #c9e88d); /* Same gradient as background */
+    align-items: center;
+}
+
+/* Target only the Email and Password input fields (thinner oblong) */
+input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 6px 10px; /* Reduced padding for thinner input fields */
+    height: 28px; /* Reduced height for thinner input */
+    border-radius: 25px; /* Larger oblong shape */
+    border: 1px solid #ccc;
+    font-size: 14px;
+    color: #809C13;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    outline: none;
+    transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+input[type="email"]:focus, input[type="password"]:focus {
+    border-color: #006600;
+    box-shadow: 0 4px 10px rgba(0, 102, 0, 0.3);
+}
+
+/* Target only the 'em' and 'pass' input fields (larger oblong) */
+input[type="em"], input[type="pass"] {
+    width: 100%;
+    padding: 8px 12px; /* Increased padding for a larger input field */
+    height: 40px; /* Increased height for a larger input */
+    border-radius: 40px; /* Larger oblong shape */
+    border: 1px solid #ccc;
+    font-size: 14px;
+    color: #809C13;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    outline: none;
+    transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+input[type="em"]:focus, input[type="pass"]:focus {
+    border-color: #006600;
+    box-shadow: 0 4px 10px rgba(0, 102, 0, 0.3);
+}
+
+</style>
+ 
+    </style>
+    <script>
+        // function showAccountCreation(accountType) {
+        //     document.getElementById('selection-box').classList.remove('active');
+        //     const formBox = document.getElementById('creation-box');
+        //     formBox.classList.add('active');
+        //     document.getElementById('account-type').textContent = accountType;
+        // }
+
+        function showLoginForm() {
+            document.getElementById('creation-box').classList.remove('active');
+            document.getElementById('login-form').classList.add('active');
+        }
+
+        function forgotPassword() {
+            alert('Redirecting to password reset page...');
+        }
+
+        function createNewAccount() {
+            document.getElementById('login-form').classList.remove('active');
+            document.getElementById('creation-box').classList.add('active');
+            // document.getElementById('selection-box').classList.add('active');
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="llogo.png" alt="VR.ified Logo">
+        </div>
+        <div class="header-line"></div>
+    </div>
+    <div class="container">
+        
+        <!-- <div id="selection-box" class="form-box">
+            <h1><em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>Be VR.ified!</em></h1> 
+           <p><h6 style="font-family: 'Libre Franklin', sans-serif; color: #809C13; font-size: 13px;">Choose your account type:</h6></p>
+
+            <br>
+
+            <div class="button-group">
+                <button class="btn" onclick="showAccountCreation('STUDENT')" style="font-family: 'Libre Franklin', sans-serif; color: #809C13; font-size: 20px;">STUDENT</button>
+  
+                <br>
+               <button class="btn" onclick="showAccountCreation('TEACHER')" style="font-family: 'Libre Franklin', sans-serif; color: #809C13; font-size: 20px;">TEACHER</button>
+
+            </div>
+
+        </div> -->
+
+        
+            <div id="creation-box" class="form-box">
+                <h1>Be VR.ified!</h1>
+                <form id="registerForm" method="POST">
+
+                    <div class="name-group">
+                        <input type="text" name="first_name" placeholder="First Name" required>
+                        <input type="text" name="last_name" placeholder="Last Name" required>
+                    </div>
+
+                    <label for="birthday" class="birthday-label">Birthday</label>
+                    <div class="birthday-group">
+                        <select name="month" required>
+                            <option value="">Month</option>
+                            <option value="January">January</option>
+                            <option value="February">February</option>
+                            <option value="March">March</option>
+                            <option value="April">April</option>
+                            <option value="May">May</option>
+                            <option value="June">June</option>
+                            <option value="July">July</option>
+                            <option value="August">August</option>
+                            <option value="September">September</option>
+                            <option value="October">October</option>
+                            <option value="November">November</option>
+                            <option value="December">December</option>
+                        </select>
+                        <input type="number" name="day" placeholder="Day" min="1" max="31" required>
+                        <input type="number" name="year" placeholder="Year" min="1900" max="2024" required>
+                    </div>
+
+                    <label for="gender" class="gender-label">Gender</label>
+                    <div class="gender-container">
+                        <div class="gender-option">
+                            <input type="radio" id="female" name="gender" value="Female" required>
+                            <label for="female">Female</label>
+                        </div>
+
+                        <div class="gender-option">
+                            <input type="radio" id="male" name="gender" value="Male" required>
+                            <label for="male">Male</label>
+                        </div>
+                    </div>
+
+                    <input type="email" name="email" placeholder="Email" required >
+                    <input type="password" name="password" placeholder="New Password" required>
+                    
+                    <label for="acc-type" class="acc-type">Account type</label>
+                    <div class="acctype-container">
+                        <div class="acctype-option">
+                            <input type="radio" id="student" name="accountType" value="Student" required>
+                            <label for="student">Student</label>
+                        </div>
+
+                        <div class="acctype-option">
+                            <input type="radio" id="teacher" name="accountType" value="Teacher" required>
+                            <label for="teacher">Teacher</label>
+                        </div>
+                    </div>
+
+
+                    <div class="button-group">
+                    <input type="submit" value="Join Now" class="submit-btn" style="color: #809C13;">
+                    </div>
+
+                    <button class="create-account-btn" onclick="showLoginForm()">Already registered? Sign In</button>
+                </form>
+            </div>
+        
+            <div id="login-form" class="form-box active">
+                <h1>Be VR.ified!</h1>
+                <form class="register-form"> 
+                    <br> <br>
+
+                    <input type="em" name="em" placeholder="Email" required>
+                    <input type="pass" name="pass" placeholder="Password" required>
+                    <div class="button-group">
+                    <br>
+                        <input type="submit" value="Log In" class="submit-btn">
+                    </div>
+                    <a href="#" class="forgot-password-link" onclick="forgotPassword()">Forgot Password?</a>
+                    <br>
+                </form>
+                <button class="create-account-btn" onclick="createNewAccount()">Create an account</button>
+            </div>
+        </div>
+
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const month = document.getElementById('month');
+    const day = document.getElementById('day');
+    const year = document.getElementById('year');
+    const birthday = document.getElementById('birthday');
+
+    function updateBirthday() {
+        const selectedMonth = month.value;
+        const selectedDay = day.value.padStart(2, '0'); // Ensure two digits
+        const selectedYear = year.value;
+
+        if (selectedMonth && selectedDay && selectedYear) {
+            birthday.value = `${selectedYear}-${selectedMonth}-${selectedDay}`;
+        }
+    }
+
+    month.addEventListener('change', updateBirthday);
+    day.addEventListener('input', updateBirthday);
+    year.addEventListener('input', updateBirthday);
+});
+
+</script>
+
+</html>
