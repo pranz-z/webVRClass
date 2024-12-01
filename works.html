@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works - VR.fied</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom right, #F0F0BE 0%, #E2E6A0 100%);
+            margin: 0;
+            padding: 0;
+            color: #444;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden; /* Prevent horizontal overflow */
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #ABC32F;
+            padding: 10px 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        header:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .icon-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #fff;
+            color: #444;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .icon-button:hover {
+            background-color: #6e9b37;
+            color: #fff;
+            transform: scale(1.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Main Content */
+        .how-it-works-title {
+            font-size: 32px;
+            font-weight: bold;
+            font-family: 'PoppinsBlack1', sans-serif;
+            color: #55793e;
+            text-align: center;
+            margin: 30px 0;
+            animation: fadeInUp 1s ease-out;
+            text-transform: uppercase;
+        }
+        .how-it-works-title1 {
+            font-size: 32px;
+            font-weight: bold;
+            font-family: 'PoppinsBlack', sans-serif;
+            color: #55793e;
+            text-align: center;
+            margin: 30px 0;
+            animation: fadeInUp 1s ease-out;
+            text-transform: uppercase;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #F0F0BE;
+            border-radius: 15px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1.2s ease-out;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .container:hover {
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .content p {
+            font-size: 16px;
+            text-align: center;
+            color: #444;
+            margin-bottom: 20px;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        .steps {
+            padding-left: 20px;
+            list-style-type: decimal;
+            font-size: 16px;
+            color: #444;
+            animation: fadeInUp 2s ease-out;
+        }
+
+        .steps li {
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .steps li:hover {
+            transform: translateX(10px);
+        }
+
+        .steps li strong {
+            color: #55793e;
+        }
+
+        .cta {
+            text-align: center;
+            margin-top: 30px;
+            animation: fadeInUp 2s ease-out;
+        }
+
+        .cta p {
+            font-size: 18px;
+            color: #55793e;
+            margin: 10px 0;
+        }
+
+        .cta button {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: #7db35a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta button:hover {
+            background-color: #689a48;
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #ABC32F;
+            text-align: center;
+            padding: 20px 0;
+            color: white;
+            font-size: 14px;
+            margin-top: auto;
+            animation: fadeIn 1s ease-out;
+        }
+
+        footer:hover {
+            background-color: #8fae2f;
+        }
+
+        /* Side Menu Styles (Right Position) */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #ABC32F;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: right 0.3s ease;
+            z-index: 2000;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+            overflow-y: auto; /* Ensures content doesn't overflow vertically */
+        }
+
+        .side-menu.open {
+            right: 0;
+        }
+
+        .side-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 15px 0;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .side-menu a:hover {
+            color: #ffb14e;
+            transform: scale(1.1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 20px;
+            }
+
+            .how-it-works-title {
+                font-size: 24px;
+            }
+
+            .content h2 {
+                font-size: 20px;
+            }
+
+            .steps {
+                font-size: 14px;
+            }
+
+            .cta p {
+                font-size: 16px;
+            }
+
+            .cta button {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+
+            .side-menu {
+                width: 100%; /* Ensure full width for small screens */
+            }
+
+            header {
+                padding: 10px 15px;
+            }
+
+            .side-menu a {
+                font-size: 16px;
+            }
+
+            .icon-button {
+                font-size: 18px;
+                padding: 10px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @font-face {
+            font-family: 'PoppinsBlack';
+            src: url('fonts/Poppins-ExtraBoldItalic.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'PoppinsBlack1';
+            src: url('fonts/Poppins-ExtraBoldItalic.ttf') format('truetype');
+            font-weight: bold;
+            font-style: italic;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="icon-button" onclick="goBack()">⬅</div>
+        <div class="icon-button" onclick="toggleMenu()">☰</div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="how-it-works-title1">How It Works?</div>
+
+    <div class="container">
+        <div class="how-it-works-title">How VR Learning Works</div>
+        <section class="content">
+            <p>Experience a step-by-step guide to joining and navigating VR Learning’s virtual classrooms.</p>
+            <ol class="steps">
+                <li><strong>Sign Up</strong><br>Create your free account to access the platform.</li>
+                <li><strong>Select a Course</strong><br>Choose from a range of subjects tailored to your interests.</li>
+                <li><strong>Enter the VR Classroom</strong><br>Use a VR headset or computer to join live, immersive classes.</li>
+                <li><strong>Learn & Interact</strong><br>Enjoy real-time interactions with teachers and classmates, complete assignments, and track your progress.</li>
+            </ol>
+        </section>
+
+        <!-- Call-to-Action -->
+        <div class="cta">
+            <p>Take a Sneak Peek at VR.fied</p>
+            <button>Watch Demo Video</button>
+            <p>Join VR.ified Today</p>
+            <button>Join Now</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>© 2024 VR.ified. All rights reserved.</footer>
+
+    <!-- Side Menu -->
+    <div class="side-menu" id="sideMenu">
+        <button class="close-btn" onclick="toggleMenu()">✕</button>
+        <a href="#">Features</a>
+        <a href="#">How it Works</a>
+        <a href="#">Benefits</a>
+        <a href="#">FAQs</a>
+    </div>
+
+    <script>
+        // Toggle side menu
+        function toggleMenu() {
+            const sideMenu = document.getElementById('sideMenu');
+            sideMenu.classList.toggle('open');
+        }
+
+        // Go back to the previous page
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

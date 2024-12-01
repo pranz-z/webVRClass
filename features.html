@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover VR.ifed's Core Features</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #F0F0BE;
+            margin: 0;
+            padding: 0;
+            color: #444;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #ABC32F;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .icon-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #fff;
+            color: #444;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .icon-button:hover {
+            background-color: #6e9b37;
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-family: 'PoppinsBlack1', sans-serif;
+            color: #444;
+            font-weight: bold;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        /* Side Menu Styles */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #ABC32F;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: right 0.3s ease;
+            z-index: 2000;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .side-menu.open {
+            right: 0;
+        }
+
+        .side-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 15px 0;
+            transition: color 0.3s ease;
+        }
+
+        .side-menu a:hover {
+            color: #ffb14e;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* Flashcard Section */
+        .carousel-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            font-family: 'PoppinsBlack', sans-serif;
+            color: #fff;
+            background-color: #6e9b37;
+            padding: 20px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin: 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .flashcard-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 30px 20px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .flashcard {
+            background-color: #ABC32F;
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+            width: 300px; /* Increased width */
+            height: 400px; /* Increased height */
+            margin-bottom: 30px;
+        }
+
+        .flashcard img {
+            width: 80%;
+            height: auto;
+            max-width: 250px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .flashcard h3 {
+            font-size: 18px; /* Increased font size */
+            font-family: 'PoppinsBlack1', sans-serif;
+            margin-bottom: 10px;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .flashcard p {
+            font-size: 14px; /* Increased font size */
+            text-align: center;
+            color: #fff;
+            line-height: 1.5;
+        }
+
+        .flashcard:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+            background-color: #6e9b37;
+        }
+
+        .flashcard img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Sparkle Effect */
+        .flashcard:hover {
+            animation: sparkle 1s infinite;
+        }
+
+        @keyframes sparkle {
+            0% {
+                box-shadow: 0 0 8px 4px rgba(255, 255, 255, 0.5), 0 0 12px 6px rgba(255, 255, 255, 0.7);
+            }
+            25% {
+                box-shadow: 0 0 12px 6px rgba(255, 255, 255, 0.6), 0 0 16px 8px rgba(255, 255, 255, 0.8);
+            }
+            50% {
+                box-shadow: 0 0 16px 8px rgba(255, 255, 255, 0.7), 0 0 20px 10px rgba(255, 255, 255, 0.9);
+            }
+            75% {
+                box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.8), 0 0 24px 12px rgba(255, 255, 255, 1);
+            }
+            100% {
+                box-shadow: 0 0 24px 12px rgba(255, 255, 255, 1), 0 0 28px 14px rgba(255, 255, 255, 1);
+            }
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #ABC32F;
+            text-align: center;
+            padding: 15px 0;
+            color: #fff;
+            font-size: 14px;
+            margin-top: auto;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .carousel-title {
+                font-size: 28px;
+            }
+
+            .flashcard h3 {
+                font-size: 20px;
+            }
+
+            .flashcard img {
+                width: 90%;
+            }
+        }
+
+        @font-face {
+            font-family: 'PoppinsBlack';
+            src: url('fonts/Poppins-ExtraBoldItalic.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'PoppinsBlack1';
+            src: url('fonts/Poppins-ExtraBold.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Franklin';
+            src: url('fonts/LibreFranklin-Italic-VariableFont_wght.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="icon-button" onclick="goBack()">⬅</div>
+        <div class="header-title">Core Features</div>
+        <div class="icon-button" onclick="toggleMenu()">☰</div>
+    </header>
+
+    <!-- Title -->
+    <div class="carousel-title">
+        Discover <strong>VR.ified</strong>'s Core Features
+    </div>
+
+    <!-- Flashcards Section -->
+    <div class="flashcard-container">
+        <!-- Flashcard 1 -->
+        <div class="flashcard">
+            <img src="Images/Features1.png" alt="Collaborative Whiteboards">
+            <h3>Collaborative Whiteboards</h3>
+            <p>Collaborate in real-time with shared whiteboards where everyone can draw, annotate, and brainstorm together.</p>
+        </div>
+
+        <!-- Flashcard 2 -->
+        <div class="flashcard">
+            <img src="Images/Features2.png" alt="VR Classrooms">
+            <h3>VR Classrooms</h3>
+            <p>Step into immersive VR classrooms with real-time interaction, connecting you with educators and peers as if in the same room.</p>
+        </div>
+
+        <!-- Flashcard 3 -->
+        <div class="flashcard">
+            <img src="Images/Features3.png" alt="Real-Time Communication">
+            <h3>Real-Time Communication</h3>
+            <p>Enjoy live communication with classmates and instructors through seamless chat and voice features.</p>
+        </div>
+
+        <!-- Flashcard 4 -->
+        <div class="flashcard">
+            <img src="Images/Features4.png" alt="Interactive VR Learning">
+            <h3>Interactive VR Learning</h3>
+            <p>Experience interactive lessons and simulations that bring learning to life in an engaging and immersive environment.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        © 2024 VR.ified. All rights reserved.
+    </footer>
+
+    <!-- Side Menu -->
+    <div class="side-menu" id="sideMenu">
+        <button class="close-btn" onclick="toggleMenu()">✕</button>
+        <a href="#">Features</a>
+        <a href="#">How it Works</a>
+        <a href="#">Benefits</a>
+        <a href="#">FAQs</a>
+    </div>
+
+    <script>
+        // Toggle the side menu
+        function toggleMenu() {
+            const sideMenu = document.getElementById('sideMenu');
+            if (sideMenu.classList.contains('open')) {
+                sideMenu.classList.remove('open');
+            } else {
+                sideMenu.classList.add('open');
+            }
+        }
+
+        // Go back to the previous page
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>
